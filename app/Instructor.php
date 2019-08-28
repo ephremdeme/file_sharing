@@ -5,11 +5,15 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\File;
 
-class Teacher extends Model
+class Instructor extends Model
 {
     //
     public function files(){
         return $this->hasMany(File::class);
+    }
+
+    public function dept(){
+        return $this->morphToMany('App\Department', 'deptables');
     }
 
     public function user(){

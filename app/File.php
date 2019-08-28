@@ -3,13 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Teacher;
+use App\Instructor;
 
 class File extends Model
 {
     //
     public function author()
     {
-        return $this->belongsTo(Teacher::class);
+        return $this->belongsTo(Instructor::class);
     }
 }

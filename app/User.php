@@ -42,4 +42,8 @@ class User extends Authenticatable
         return $this->morphTo();
     }
 
+    public function roles(){
+        return $this->belongsToMany('App\Role');
+    }
+
 }
