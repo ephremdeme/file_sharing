@@ -20,12 +20,12 @@ class Files extends Migration
             $table->string('type')->nullable();
             $table->string('size')->nullable();
             $table->string('description')->nullable();
-            $table->string('course_code')->nullable();
+            $table->unsignedBigInteger('course_id')->nullable();
             $table->timestamps();
             $table->unsignedBigInteger('instructor_id')->nullable();
 
             $table->foreign('instructor_id')->references('id')->on('instructors');
-            $table->foreign('course_code')->references('course_code')->on('courses');
+            $table->foreign('course_id')->references('id')->on('courses');
 
         });
     }

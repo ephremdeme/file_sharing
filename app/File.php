@@ -12,4 +12,12 @@ class File extends Model
     {
         return $this->belongsTo(Instructor::class);
     }
+
+    public function course(){
+        return $this->belongsTo('App\Course');
+    }
+
+    public function users(){
+        return $this->hasManyThrough('App\User', 'App\Course' );
+    }
 }
