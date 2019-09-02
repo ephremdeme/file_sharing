@@ -23,3 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('files', 'FileController');
 
 Route::resource('students', 'StudentController');
+
+Route::get('/test', function(){
+    return Auth::user()->userable;
+});

@@ -6,11 +6,18 @@
 
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Data Table With Full Features</h3>
+                <h3 class="card-title">File management Table With Full Features</h3>
+                
             </div>
+            
             <!-- /.card-header -->
             <div class="card-body">
-                <table id="dtBasicExample" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i
+                        class="fas fa-plus fa-2x" aria-hidden="true"></i></a></span>
+                
+                    <div class="table-responsive-sm">
+                        
+                <table id="dtBasicExample" class="table table-striped  table-bordered" cellspacing="0" width="100%">
                     <thead>
                         <tr>
                             <th class="th-sm">Name
@@ -502,6 +509,7 @@
                         </tr>
                     </tfoot>
                 </table>
+                </div>
             </div>
             <!-- /.card-body -->
         </div>
