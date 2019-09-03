@@ -16,4 +16,7 @@ class Course extends Model
         return $this->hasMany('App\File');
     }
 
+    public function department(){
+        return $this->belongsTo('App\Department', 'dept_name', 'name');
+    }
 }

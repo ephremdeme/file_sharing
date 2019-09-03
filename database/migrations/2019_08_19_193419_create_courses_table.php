@@ -17,7 +17,7 @@ class CreateCoursesTable extends Migration
             $table->bigIncrements('id');
             $table->string('course_code')->unique();
             $table->string('name');
-            $table->string('dept_name');
+            $table->string('dept_name')->nullable();
             $table->timestamps();
             $table->foreign('dept_name')->references('name')->on('departments');
         });
