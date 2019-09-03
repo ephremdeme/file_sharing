@@ -35,7 +35,16 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name = $request->input('name');
+        $building = $request->input('building');
+        $school = $request->input('school');
+        
+        $dept = new Department();
+        $dept->name=$name;
+        $dept->building=$building;
+        $dept->school=$school;
+                
+        $dept->save();
     }
 
     /**
@@ -69,7 +78,18 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, Department $department)
     {
-        //
+        $dept = Department::find($id);
+
+        $name = $request->input('name');
+        $building = $request->input('building');
+        $school = $request->input('school');
+        
+        $dept = new Department();
+        $dept->name=$name;
+        $dept->building=$building;
+        $dept->school=$school;
+                
+        $dept->save();
     }
 
     /**
@@ -80,6 +100,7 @@ class DepartmentController extends Controller
      */
     public function destroy(Department $department)
     {
-        //
+        $dept = Department::destroy($id);
+        return "deleted";
     }
 }

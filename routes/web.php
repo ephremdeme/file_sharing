@@ -23,6 +23,12 @@ Route::resource('files', 'FileController');
 
 Route::resource('students', 'StudentController');
 
+Route::resource('courses', 'CourseController');
+
+Route::resource('departments', 'DepartmentController');
+
+
+
 Route::get('/test', function(){
     return Auth::user()->userable;
 });

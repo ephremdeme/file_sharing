@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Student;
+use App\Course;
+use App\Department;
 
-class StudentController extends Controller
+class CourseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +17,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return view('student.index', ['students'=>Student::all(), 'user'=>Auth::user()]);
+     return view('course.index', ['courses'=>Course::all(), 'departments'=>Department::all()]);
+
     }
 
     /**
@@ -25,7 +28,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view("registerStudent");
+        //
     }
 
     /**
@@ -36,23 +39,20 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $id = $request->input('id');
+        $course_code = $request->input('course_code');
         $name = $request->input('name');
-        $gender = $request->input('gender');
-        $department = $request->input('department');
-        $section = $request->input('section');
+        $dept_name = $request->input('dept');
 
+        $department = Department::find($dept_name);
 
-        
-        $student = new Student();
-        $student->stud_id=$id;
-        $student->name=$name;
-        $student->gender=$gender;
+        $course = new Course();
+        $course->course_code=$course_code;
+        $course->name=$name;
+        $department->courses()->save($course);
                 
+        $course->save();
 
-        $student->save();
-
-        return $id."  ".$gender."  ".$name;
+        return back();
     }
 
     /**
@@ -63,7 +63,7 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        return view('student.view', ['student' => Student::find($id)]);
+        //
     }
 
     /**
@@ -74,8 +74,7 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        $student = Student::find($id);
-        return $student;
+        //
     }
 
     /**
@@ -87,19 +86,21 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $student = Student::find($id);
-        
+        $course = Course::find($id);
 
-        $id = $request->input('id');
+        $course_code = $request->input('course_code');
         $name = $request->input('name');
-        $gender = $request->input('gender');
+        $dept_name = $request->input('dept');
+        
+        $department = Department::find($dept_name);
+        $course->course_code=$course_code;
+        $course->name=$name;
+                
+        $course->save();
 
-        $student->stud_id=$id;
-        $student->name=$name;
-        $student->gender=$gender;
-        $student->save();
+        $department->courses()->save($course);
 
-        return $student;
+        return back();
 
 
     }
@@ -112,9 +113,7 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        $student = Student::destroy($id);
+        $course = Course::destroy($id);
         return "deleted";
-
-
     }
 }

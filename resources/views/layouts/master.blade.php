@@ -104,7 +104,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <img src="img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Engida Pierce</a>
+          <a href="#" class="d-block">Pierce</a>
         </div>
       </div>
 
@@ -126,6 +126,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             
           </li>
+
+          <li class="nav-item">
+            <a href="/students" class="nav-link active">
+                <span class="fa-stack">
+                    <i class="fas fa-square fa-stack-2x"></i>
+                    <i class="fas fa-user fa-stack-1x fa-inverse" ></i>
+                  </span>        
+              <p>
+                Student Management
+                
+              </p>
+            </a>
+            
+          </li>
+
           <li class="nav-item has-treeview">
             <a href="/users" class="nav-link">
               <span class="fa-stack">
@@ -168,12 +183,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">File Management Page</h1>
+            <h1 class="m-0 text-dark">Student Management Page</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">File Page</li>
+              <li class="breadcrumb-item active">Student Page</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->

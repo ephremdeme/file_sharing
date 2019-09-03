@@ -16,4 +16,8 @@ class Department extends Model
         return $this->morphedByMany('App\Student' , 'deptables');
     }
 
+    public function courses(){
+        return $this->hasMany('App\Course', 'dept_name', 'name');
+    }
+
 }
