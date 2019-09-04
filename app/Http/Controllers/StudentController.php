@@ -52,7 +52,8 @@ class StudentController extends Controller
 
         $student->save();
 
-        return $id."  ".$gender."  ".$name;
+        return back();
+
     }
 
     /**
@@ -100,6 +101,8 @@ class StudentController extends Controller
         $student->save();
 
         return $student;
+
+        return back();
 
 
     }
