@@ -163,7 +163,7 @@
                 <form id="editForm" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    @include('course.form')
+                    @include('student.form')
                 </form>
             </div>
 

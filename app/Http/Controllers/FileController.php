@@ -97,6 +97,7 @@ class FileController extends Controller
         $sec = $request->input('section');
         $school = $request->input('school');
         $file_name = $request->input('file_name');
+        $file->description = $request->input('description');
         
         if($request->file('file')){
             if ($request->file('file')->isValid()) {

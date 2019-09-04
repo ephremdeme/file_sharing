@@ -11,6 +11,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <title>AdminLTE 3 | Starter</title>
   <link rel="stylesheet" href="css/app.css">
+  <style>
+    .card.card-cascade .view.gradient-card-header {
+            padding: 1.1rem 1rem;
+        }
+
+        .card.card-cascade .view {
+            box-shadow: 0 5px 12px 0 rgba(0, 0, 0, 0.2), 0 2px 8px 0 rgba(0, 0, 0, 0.19);
+        }
+    </style>
   @yield('specificCSS')
   
 

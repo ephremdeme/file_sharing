@@ -16,6 +16,7 @@
             $('#nameselect').val($(this).data('name'))
             $('#descselect').val($(this).data('desc'))
             $('#courseselect').val($(this).data('course_code'))
+            $("#editform").attr('action', "/files/" + $(this).data('id'));
 
         })
     }
@@ -70,10 +71,10 @@
                                 <td>{{$file->created_at}}</td>
                                 <td>{{$user->userable->name}}</td>
                                 <td>
-                                    <span class="table-remove"><button data-toggle="modal" data-target="#addFile"
+                                    <span class="table-remove"><button data-toggle="modal" data-target="#editFile"
                                             type="button" data-name="{{$file->name}}" data-desc="{{$file->description}}"
                                             data-type="{{$file->type}}" data-size="{{$file->size}}"
-                                            data-course_code="{{$file->course->course_code}}"
+                                            data-course_code="{{$file->course->course_code}}" data-id="{{$file->id}}"
                                             class="btn btn-success btn-rounded btn-sm my-0 edit">Edit </button></span>
                                 </td>
                                 <td>
@@ -148,6 +149,27 @@
             <div class="modal-body">
                 <form action="{{ route('files.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @include('file.form')
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editFile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editform" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
                     <div class="form-group">
                         <label for="yearselect">Year </label>
                         <select name="year" class="form-control" id="yearselect">
@@ -159,7 +181,7 @@
                             <option value=5>5 Year</option>
                         </select>
                     </div>
-
+                    
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="courseselect">Course </label>
@@ -170,21 +192,21 @@
                                 @endforeach
                             </select>
                         </div>
-
+                    
                         <div class="form-group col-md-4">
                             <label for="deptselect">Department</label>
                             <select name="dept" class="form-control" id="deptselect">
                                 <option value="" disabled selected>Select dept</option>
                             </select>
                         </div>
-
+                    
                         <div class="form-group col-md-4">
                             <label for="secselect">Section</label>
                             <input type="number" min="1" max="50" required name="section" class="form-control"
                                 id="secselect" aria-describedby="SectioHelp" placeholder="Enter Section">
                         </div>
                     </div>
-
+                    
                     <div class="form-group">
                         <label for="nameselect">File Name</label>
                         <input type="text" name="file_name" class="form-control" id="nameselect"
