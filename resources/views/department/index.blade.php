@@ -13,11 +13,11 @@
 
     function fill_form() {
         $('.edit').on('click', function () {
-            $('#nameselect').val($(this).data('name'))
-            $('#buildingselect').val($(this).data('building'))
-            $('#schoolselect').val($(this).data('school'))
+            $('#nameselect1').val($(this).data('name'))
+            $('#buildingselect1').val($(this).data('building'))
+            $('#schoolselect1').val($(this).data('school'))
 
-            $("#editform").attr('action', "/departments/" + $(this).data('id'));
+            $("#editForm").attr('action', "/departments/" + $(this).data('id'));
 
         })
     }
@@ -44,8 +44,9 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <span class="table-add float-right mb-3 mr-2"><a href="#!" data-toggle="modal" data-target="#addstudent"
-                        class="text-success"><i class="fas fa-plus fa-2x" aria-hidden="true"></i></a></span>
+                <span class="table-add float-right mb-3 mr-2"><a href="#!" data-toggle="modal"
+                        data-target="#adddepartment" class="text-success"><i class="fas fa-plus fa-2x"
+                            aria-hidden="true"></i></a></span>
                 <div class="table-responsive-sm">
                     <table id="dtBasicExample" class="table table-striped  table-bordered" cellspacing="0" width="100%">
                         <thead>
@@ -68,13 +69,15 @@
                                 <td>
                                     <span class="table-remove"><button data-toggle="modal" data-target="#editdepartment"
                                             type="button" data-name="{{$department->name}}"
-                                            data-stud_id="{{$department->building}}" data-gender="{{$department->school}}"
+                                            data-building="{{$department->building}}"
+                                            data-school="{{$department->school}}"
+                                            data-id = "{{ $department->id }}"
                                             class="btn btn-success btn-rounded btn-sm my-0 edit">Edit </button></span>
                                 </td>
                                 <td>
 
                                     <span class="table-remove"><button type="button" data-id="{{$department->id}}"
-                                            data-toggle="modal" data-target="#deleteStudent"
+                                            data-toggle="modal" data-target="#deletedepartemnt"
                                             class="btn btn-danger btn-rounded btn-sm my-0 remove">Remove</button></span>
                                 </td>
                             </tr>
@@ -82,13 +85,13 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                            <th class="th-sm">name</th>
+                                <th class="th-sm">name</th>
                                 <th class="th-sm">building</th>
                                 <th class="th-sm">school</th>
                                 <th class="th-sm">Creadted at</th>
                                 <th class="th-sm">Edit</th>
                                 <th class="th-sm">Remove</th>
-                                
+
                             </tr>
                         </tfoot>
                     </table>
@@ -129,7 +132,8 @@
     </div>
 </div>
 
-<div class="modal fade" id="adddepartment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="adddepartment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -149,7 +153,8 @@
     </div>
 </div>
 
-<div class="modal fade" id="editdepartment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editdepartment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -162,13 +167,30 @@
                 <form id="editForm" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    @include('course.form')
+                    
+
+                    
+                    <div class="form-group">
+                        <label for="nameselect1">Name</label>
+                        <input type="text" name="name" class="form-control" id="nameselect1" placeholder="Student Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="buildingselect1">Building</label>
+                        <input class="form-control" name="building" id="buildingselect1" placeholder="building">
+                    </div>
+                    <div class="form-group">
+                        <label for="schoolselect1">School</label>
+                        <input class="form-control" name="school" id="schoolselect1" placeholder="school">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
                 </form>
             </div>
 
         </div>
     </div>
 </div>
-
-
 @endsection

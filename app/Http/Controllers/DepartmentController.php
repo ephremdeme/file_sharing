@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Department;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
@@ -14,7 +15,7 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        //
+        return view('department.index' , ['departments'=> Department::all(), 'user'=>Auth::user()]);
     }
 
     /**
@@ -45,6 +46,8 @@ class DepartmentController extends Controller
         $dept->school=$school;
                 
         $dept->save();
+
+        return back();
     }
 
     /**
@@ -78,18 +81,19 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, Department $department)
     {
-        $dept = Department::find($id);
+        $dept = $department;
 
         $name = $request->input('name');
         $building = $request->input('building');
         $school = $request->input('school');
         
-        $dept = new Department();
         $dept->name=$name;
         $dept->building=$building;
         $dept->school=$school;
                 
         $dept->save();
+
+        return back();
     }
 
     /**

@@ -13,10 +13,10 @@
 
     function fill_form() {
         $('.edit').on('click', function () {
+            $('#idselect').val($(this).data('stud_id'))
             $('#nameselect').val($(this).data('name'))
             $('#genderselect').val($(this).data('gender'))
             $('#courseselect').val($(this).data('course_code'))
-            $('#idselect').val($(this).data('stud_id'))
 
             $("#editform").attr('action', "/students/" + $(this).data('id'));
 
@@ -150,6 +150,8 @@
     </div>
 </div>
 
+
+
 <div class="modal fade" id="editstudent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -163,7 +165,64 @@
                 <form id="editForm" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    @include('course.form')
+
+                            <div class="form-group">
+                <label for="yearselect">Year </label>
+                    <select name="year" class="form-control" id="yearselect">
+                        <option value="" disabled selected>Select Year</option>
+                        <option value=1>1 Year</option>
+                        <option value=2>2 Year</option>
+                        <option value=3>3 Year</option>
+                        <option value=4>4 Year</option>
+                        <option value=5>5 Year</option>
+                    </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="courseselect">Course </label>
+                            <select name="course_code" class="form-control" id="courseselect">
+                                <option value="" disabled selected>Select Course</option>
+                                @foreach ($user->courses as $course)
+                                <option value={{$course->id}}->{{$course->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="deptselect">Department</label>
+                            <select name="dept" class="form-control" id="deptselect">
+                                <option value="" disabled selected>Select dept</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                                <label for="secselect">Section</label>
+                                <input type="number" min="1" max="50" required name="section" class="form-control"
+                                    id="secselect" aria-describedby="SectioHelp" placeholder="Enter Section">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nameselect">Student Name</label>
+                            <input type="text" name="name" class="form-control" id="nameselect"
+                                placeholder="Student Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="idselect">Student id</label>
+                            <input class="form-control" name="id" id="idselect" placeholder="student id">
+                        </div>
+                        <div class="form-group">
+                            <label for="genderselect">Gender</label>
+                            <input class="form-control" name="gender" id="genderselect" placeholder="gender">
+                        </div>
+        
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+            </div>
+
                 </form>
             </div>
 
