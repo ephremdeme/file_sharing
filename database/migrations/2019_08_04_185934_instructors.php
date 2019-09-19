@@ -14,11 +14,16 @@ class Instructors extends Migration
     public function up()
     {
         Schema::create('instructors', function (Blueprint $table) {
-            $table->unsignedBigInteger('id');
+            $table->unsignedBigInteger('id')->unique();
             $table->string('title');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('gender')->nullable();
             $table->string('instructor_id')->nullable();
             $table->timestamps();
+
             $table->foreign('id')->references('id')->on('users');
+            $table->primary('id');
         });
     }
 

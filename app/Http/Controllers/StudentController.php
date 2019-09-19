@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Student;
+use App\Imports\StudentsImport;
+use App\Imports\TakesImport;
 
 class StudentController extends Controller
 {
@@ -28,6 +31,23 @@ class StudentController extends Controller
         return view("registerStudent");
     }
 
+    public function importTakes(Request $request){
+        $this->validate($request, [
+            'files'  => 'required|mimes:xls,xlsx'
+           ]);
+        Excel::import(new TakesImport, $request->file('files'));
+        
+        return back()->with('success', "successfully uploaded Student's takes excel file!");
+    }
+
+    public function importStudents(Request $request){
+        $this->validate($request, [
+            'files'  => 'required|mimes:xls,xlsx'
+           ]);
+        Excel::import(new StudentsImport, $request->file('files'));
+        return back()->with('success', "successfully uploaded Students list excel file!");
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -42,8 +62,6 @@ class StudentController extends Controller
         $department = $request->input('department');
         $section = $request->input('section');
 
-
-        
         $student = new Student();
         $student->stud_id=$id;
         $student->name=$name;
@@ -51,6 +69,7 @@ class StudentController extends Controller
                 
 
         $student->save();
+
 
         return back();
 

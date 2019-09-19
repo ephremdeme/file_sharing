@@ -14,33 +14,31 @@ use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('home');
-});
+})->middleware('auth');
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
-Route::resource('files', 'FileController');
+Route::post('/students/import_takes', 'StudentController@importTakes')->name('import_takes');
 
-Route::resource('students', 'StudentController');
+Route::post('/students/import_student', 'StudentController@importStudents')->name('import_student');
 
-Route::resource('courses', 'CourseController');
+Route::resource('files', 'FileController')->middleware('auth');
 
-Route::resource('departments', 'DepartmentController');
+Route::resource('students', 'StudentController')->middleware('auth');
+
+Route::resource('courses', 'CourseController')->middleware('auth');
+
+Route::resource('departments', 'DepartmentController')->middleware('auth');
 
 
 
-Route::get('/test', function(){
-    return Auth::user()->userable;
-});
-//multi-auth for normal users, admins and teachers
+Route::get('/start', 'ViewFileController@index')->middleware('auth');
 
-Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm');
-Route::get('/login/teacher', 'Auth\LoginController@showTeacherLoginForm');
-
-Route::post('/login/teacher', 'Auth\LoginController@teacherLogin');
-
-Route::get('/admin', 'AdminController@index');
-Route::get('/teacher', 'TeacherController@index');
+Route::get('/admin', 'ViewFileController@index')->middleware('auth');
+Route::get('/instructors/import_teaches', 'InstructorController@importTeachesView');
+Route::post('/instructors/import_teaches', 'InstructorController@importTeaches')->name('import_teaches');
+Route::resource('/instructors', 'InstructorController')->middleware('auth');
 
 
 Route::get('/starter', function () {

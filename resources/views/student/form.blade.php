@@ -1,4 +1,4 @@
-<div class="form-group">
+{{-- <div class="form-group">
     <label for="yearselect1">Year </label>
     <select name="year" class="form-control" id="yearselect1">
         <option value="" disabled selected>Select Year</option>
@@ -46,6 +46,11 @@
 <div class="form-group">
     <label for="genderselect1">Gender</label>
     <input class="form-control" name="gender" id="genderselect1" placeholder="gender">
+</div> --}}
+
+<div class="form-group">
+    <label for="fileselect">Select File</label>
+    <input type="file" name="files" class="form-control-file" id="fileselect">
 </div>
 
 <div class="modal-footer">

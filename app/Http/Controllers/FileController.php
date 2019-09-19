@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use App\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
+use App\ViewFileInstructor;
 class FileController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->authorizeResource(File::class, 'file');
-    }
+    // public function __construct()
+    // {
+    //     $this->authorizeResource(File::class, 'file');
+    // }
+
 
     /**
      * Display a listing of the resource.
@@ -21,7 +23,7 @@ class FileController extends Controller
      */
     public function index()
     {
-        return view('file.index', ['files' =>  Auth::user()->files, 'user' => Auth::user()]);
+        return view('file.index', ['files' =>  ViewFileInstructor::where('user_id', Auth::id())->get(), 'user' => Auth::user()]);
     }
 
     /**
@@ -43,23 +45,26 @@ class FileController extends Controller
     public function store(Request $request)
     {
         $file = new File();
-        
-        $year = $request->input('year');
         $sec = $request->input('section');
-        $school = $request->input('school');
+        $course_code = $request->input('course_code');
         $file_name = $request->input('file_name');
-        echo $year.$sec;
+        
         if ($request->file('file')->isValid()) {
             $name = $request->file('file')->store('files');
             $file->name = $file_name;
             $file->path = $name;
             $file->type = $request->file('file')->getClientOriginalExtension();
             $file->size = $request->file('file')->getSize();
+            $file->description = $request->input('description');
             $file->save();
-            Auth::user()->userable->files()->save($file);
-            return "successfull";
+            
+            DB::table('file_section')->insert(
+                ['file_id'=>$file->id, 'year'=>date("Y"), 'sec_id'=>$sec, 'course_code'=>$course_code, 'semester'=>2]
+            );
+            return back();
         }
-        return $year.$file_name;
+
+        return back();
     }
 
     /**
@@ -70,7 +75,7 @@ class FileController extends Controller
      */
     public function show(File $file)
     {
-        return $file;
+        return response()->file(base_path('storage/app/'.$file->path));
     }
 
     /**
@@ -103,9 +108,13 @@ class FileController extends Controller
             if ($request->file('file')->isValid()) {
                 $name = $request->file('file')->store('files');
                 $file->name = $file_name;
-                $file->path = $name;
+                $file->path = $request->file('file')->store('files');
+                $file->type = $request->file('file')->getClientOriginalExtension();
+                $file->size = $request->file('file')->getSize();
+                $file->description = $request->input('description');
                 $file->save();
-                return "successfull";
+
+                return back();
             }
         }
         
@@ -126,5 +135,6 @@ class FileController extends Controller
         if($check==0){
             return "Failed to delete";
         }
-        return "successfull";    }
+        return back() ;
+    }
 }

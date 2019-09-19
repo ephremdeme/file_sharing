@@ -14,14 +14,19 @@ class CreateSectionsTable extends Migration
     public function up()
     {
         Schema::create('sections', function (Blueprint $table) {
-            $table->bigIncrements('id');
             $table->year('year');
-            $table->unsignedSmallInteger('sec_id');
-            $table->unsignedSmallInteger('semister');
+            $table->unsignedInteger('semester');
             $table->string('course_code');
+            $table->unsignedInteger('sec_id');
             $table->timestamps();
             
+            $table->index('id'); 
+            $table->index('course_code');
+            $table->index('semester');
+            $table->index('year');
+            $table->index('sec_id');
             $table->foreign('course_code')->references('course_code')->on('courses');
+            
         });
     }
 

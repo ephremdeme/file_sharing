@@ -38,7 +38,27 @@
 @section('content')
 <div class="row">
     <div class="col-12">
-
+            @if(count($errors) > 0)
+            <div class="alert alert-danger alert-dismissible fade show col-md-auto" role="alert">
+                    Upload Validation Error<br><br>
+                    <ul>
+                     @foreach($errors->all() as $error)
+                     <li>{{ $error }}</li>
+                     @endforeach
+                    </ul>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+            
+           @endif
+        
+           @if($message = Session::get('success'))
+           <div class="alert alert-success alert-block">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+                   <strong>{{ $message }}</strong>
+           </div>
+           @endif
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Student management Table With Full Features</h3>
@@ -51,7 +71,8 @@
                     <table id="dtBasicExample" class="table table-striped  table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th class="th-sm">name</th>
+                                <th class="th-sm">First Name</th>
+                                <th class="th-sm">Last Name</th>
                                 <th class="th-sm">stud_id</th>
                                 <th class="th-sm">gender</th>
                                 <th class="th-sm">Creadted at</th>
@@ -62,8 +83,9 @@
                         <tbody>
                             @foreach ($students as $student)
                             <tr>
-                                <td>{{$student->name}}</td>
-                                <td>{{$student->stud_id}}</td>
+                                <td>{{$student->first_name}}</td>
+                                <td>{{$student->last_name}}</td>
+                                <td>{{$student->student_id}}</td>
                                 <td>{{$student->gender}}</td>
                                 <td>{{$student->created_at}}</td>
                                 <td>
@@ -83,9 +105,10 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                            <th class="th-sm">name</th>
-                            <th class="th-sm">stud_id</th>
-                            <th class="th-sm">gender</th>
+                                    <th class="th-sm">First Name</th>
+                                    <th class="th-sm">Last Name</th>
+                            <th class="th-sm">ID</th>
+                            <th class="th-sm">Gender</th>
                             <th class="th-sm">Creadted at</th>
                             <th class="th-sm">Edit</th>
                             <th class="th-sm">Remove</th>
@@ -140,7 +163,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('students.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('import_takes') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @include('student.form')
                 </form>

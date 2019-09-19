@@ -15,9 +15,10 @@ class Students extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->unique();
-            $table->string('stud_id')->nullable();
+            $table->string('student_id')->nullable();
             $table->string('gender')->nullable();
-            $table->string('name')->nullable();
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
             $table->timestamps();
 
             $table->foreign('id')->references('id')->on('users');

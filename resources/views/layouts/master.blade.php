@@ -15,19 +15,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
     @yield('specificCSS')
 
 
-  <title>AdminLTE 3 | Starter</title>
-  <link rel="stylesheet" href="css/app.css">
-  <style>
-    .card.card-cascade .view.gradient-card-header {
+    <title>AdminLTE 3 | Starter</title>
+    <link rel="stylesheet" href="css/app.css">
+    <style>
+        .card.card-cascade .view.gradient-card-header {
             padding: 1.1rem 1rem;
         }
 
         .card.card-cascade .view {
             box-shadow: 0 5px 12px 0 rgba(0, 0, 0, 0.2), 0 2px 8px 0 rgba(0, 0, 0, 0.19);
         }
+
     </style>
-  @yield('specificCSS')
-  
+    @yield('specificCSS')
+
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -42,6 +43,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="/" class="nav-link">Home</a>
                 </li>
+                @auth
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="profile" class="nav-link">Profile</a>
+                </li>
+                @endauth
+
+
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="contact" class="nav-link">Contact</a>
                 </li>
@@ -81,7 +89,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        {{ Auth::user()->name }} <span class="caret"></span>
+                        {{ Auth::user()->username }} <span class="caret"></span>
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -127,13 +135,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+                             with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="#" class="nav-link active">
-                                <span class="fa-stack">
-                                    <i class="fas fa-square fa-stack-2x"></i>
-                                    <i class="fas fa-file fa-stack-1x fa-inverse" style="color:black"></i>
-                                </span>
+                            <a href="/files" class="nav-link">
+                                <i class=" fa fa-file nav-icon" aria-hidden="true"></i>
+
                                 <p>
                                     File Management
 
@@ -143,14 +149,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </li>
 
                         <li class="nav-item">
-                            <a href="/students" class="nav-link active">
-                                <span class="fa-stack">
-                                    <i class="fas fa-square fa-stack-2x"></i>
-                                    <i class="fas fa-user fa-stack-1x fa-inverse"></i>
-                                </span>
+                            <a href="/users" class="nav-link">
+                                <i class=" fas fa-users fa-2x nav-icon"></i>
                                 <p>
-                                    Student Management
-
+                                    User Management
                                 </p>
                             </a>
 
@@ -158,11 +160,44 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                         <li class="nav-item has-treeview">
                             <a href="/users" class="nav-link">
-                                <i class="fa fa-users" aria-hidden="true"></i>
+                                <i class=" fa fa-chalkboard-teacher fa-2x nav-icon" aria-hidden="true"></i>
 
                                 {{-- <i class=" fas fa-users fa-2x"></i> --}}
                                 <p>
-                                    User Management
+                                    Instructor Management
+                                    <i class="right fa fa-angle-left"></i>
+                                    {{-- <span class="right badge badge-danger">New</span> --}}
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/instructors" class="nav-link active">
+                                        <i class="fa fa-home nav-icon"></i>
+                                        <p>Index</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/instructors/import_teaches" class="nav-link">
+                                        <i class="fa fa-file-import nav-icon"></i>
+                                        <p>Import Teaches</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="/instructors" class="nav-link">
+                                        <i class="fa fa-file-import nav-icon"></i>
+                                        <p>Import Instructors</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="/students" class="nav-link">
+                                <i class=" fa fa-user-graduate fa-2x nav-icon" aria-hidden="true"></i>
+
+                                {{-- <i class=" fas fa-users fa-2x"></i> --}}
+                                <p>
+                                    Student Management
                                     <i class="right fa fa-angle-left"></i>
                                     {{-- <span class="right badge badge-danger">New</span> --}}
                                 </p>
@@ -170,14 +205,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="/students" class="nav-link active">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Student</p>
+                                        <i class="fa fa-home nav-icon"></i>
+                                        <p>Index</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/instructors" class="nav-link">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Instructors</p>
+                                    <a href="/students/import_takes" class="nav-link ">
+                                        <i class="fa fa-file-import nav-icon"></i>
+                                        <p>Import Takes</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="/students/import_students" class="nav-link">
+                                        <i class="fa fa-file-import nav-icon"></i>
+                                        <p>Import Students</p>
                                     </a>
                                 </li>
                             </ul>
