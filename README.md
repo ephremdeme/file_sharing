@@ -1,4 +1,6 @@
 # file_sharing
 file sharing system for ASTU students and teachers
 
-student mgmt
+contribution guidelines
+1. composer install on root directry
+2. npm install on root directry
