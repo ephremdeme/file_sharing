@@ -20,4 +20,9 @@ class Instructor extends Model
         return $this->morphOne('App\User', 'userable');
     }
 
+    public function teaches()
+    {
+        return $this->hasMany('App\Teach', 'id', 'id');
+    }
+
 }

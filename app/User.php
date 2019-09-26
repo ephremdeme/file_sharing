@@ -51,14 +51,11 @@ class User extends Authenticatable
         ->using('App\CourseUser');
     }
 
-    public function files(){
-        return $this->hasManyThrough(
-            'App\File', 
-            'App\CourseUser',
-            'user_id',
-            'course_id',
-            'id',
-            'course_id'
-        );
+    public function hasRole($role){
+        $count = $this->roles()->where('name', $role)->count();
+        if($count==1){
+            return true;
+        }
+        return false;
     }
 }

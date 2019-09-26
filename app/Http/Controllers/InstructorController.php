@@ -29,17 +29,7 @@ class InstructorController extends Controller
      */
     public function create()
     {
-        //
-    }
-
-    public function importInstructors(request $request)
-    {
-        $this->validate($request, [
-            'files'  => 'required|mimes:xls,xlsx'
-           ]);
-        Excel::import(new InstructorsImport, $request->file('files'));
-
-        return back()->with('success', "successfully uploaded Instructors excel file!");
+        return view('import', ['name'=>'Instructors', 'route'=>'instructors.store']);
     }
 
     /**
@@ -50,12 +40,17 @@ class InstructorController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $this->validate($request, [
+            'files'  => 'required|mimes:xls,xlsx'
+           ]);
+        Excel::import(new InstructorsImport, $request->file('files'));
+
+        return back()->with('success', "successfully uploaded Instructors excel file!");
     }
 
     public function importTeachesView()
     {
-        return view('instructor.importTeaches');
+        return view('import', ['name'=>'Teaches', 'route'=>'import_teaches']);
     }
 
     public function importTeaches(Request $request){

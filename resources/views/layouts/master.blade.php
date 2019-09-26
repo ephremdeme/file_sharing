@@ -11,12 +11,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <title>AdminLTE 3 | Starter</title>
-    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href={{ asset("css/app.css") }}>
     @yield('specificCSS')
 
 
     <title>AdminLTE 3 | Starter</title>
-    <link rel="stylesheet" href="css/app.css">
     <style>
         .card.card-cascade .view.gradient-card-header {
             padding: 1.1rem 1rem;
@@ -55,26 +54,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </li>
             </ul>
 
-            <!-- SEARCH FORM -->
-            <form class="form-inline ml-3">
-                <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                        aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar" type="submit">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
+
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
 
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i
-                            class="fa fa-th-large"></i></a>
-                </li>
+                <!-- SEARCH FORM -->
+                <form class="form-inline ml-3">
+                    <div class="input-group input-group-sm">
+                        <input class="form-control form-control-navbar" type="search" placeholder="Search"
+                            aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-navbar" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
 
                 @guest
                 <li class="nav-item">
@@ -113,9 +109,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="index3.html" class="brand-link">
-                <img src="img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                <img src="{{ asset('img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
+                <span class="brand-text font-weight-light">FSP</span>
             </a>
 
             <!-- Sidebar -->
@@ -123,7 +119,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                        <img src="{{ asset(' img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">Pierce</a>
@@ -177,14 +173,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/instructors/import_teaches" class="nav-link">
+                                    <a href="/instructors/import_teaches"  class="nav-link">
                                         <i class="fa fa-file-import nav-icon"></i>
                                         <p>Import Teaches</p>
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="/instructors" class="nav-link">
+                                    <a href="/instructors/create" class="nav-link">
                                         <i class="fa fa-file-import nav-icon"></i>
                                         <p>Import Instructors</p>
                                     </a>
@@ -217,7 +213,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="/students/import_students" class="nav-link">
+                                    <a href="/students/create" class="nav-link">
                                         <i class="fa fa-file-import nav-icon"></i>
                                         <p>Import Students</p>
                                     </a>
@@ -236,17 +232,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Student Management Page</h1>
-                        </div><!-- /.col -->
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Student Page</li>
-                            </ol>
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
+
+                    @yield('content_header')
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
@@ -254,6 +241,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Main content -->
             <div class="content">
                 <div class="container-fluid">
+                    {{-- <div class="row mb-2">
+                                <div class="col-sm-6">
+                                    <h1 class="m-0 text-dark">Student Management Page</h1>
+                                </div><!-- /.col -->
+                                <div class="col-sm-6">
+                                    <ol class="breadcrumb float-sm-right">
+                                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                        <li class="breadcrumb-item active">Student Page</li>
+                                    </ol>
+                                </div><!-- /.col -->
+                            </div><!-- /.row --> --}}
                     @yield('content')
                     <!-- /.row -->
                 </div><!-- /.container-fluid -->
@@ -263,29 +261,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- /.content-wrapper -->
 
         <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-            <div class="p-3">
-                <h5>Title</h5>
-                <p>Sidebar content</p>
-            </div>
-        </aside>
+
         <!-- /.control-sidebar -->
 
         <!-- Main Footer -->
         <footer class="main-footer">
             <!-- To the right -->
             <div class="float-right d-none d-sm-inline">
-                Anything you want
+                ASTU FILE SHARING PLATFORM
             </div>
             <!-- Default to the left -->
-            <strong>Copyright &copy; 2014-2018 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights
+            <strong>Copyright &copy; 2019 <a href="http://www.astu.edu.et">ASTU</a>.</strong> All rights
             reserved.
         </footer>
     </div>
     <!-- ./wrapper -->
 
-    <script src="js/app.js"></script>
+    <!-- Modal -->
+
+
+
+
+    <!--./Modal -->
+
+    <script src={{ asset("js/app.js") }}></script>
 
     @yield('specificJS')
 </body>

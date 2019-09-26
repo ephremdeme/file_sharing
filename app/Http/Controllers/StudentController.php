@@ -28,7 +28,12 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view("registerStudent");
+        return view('import', ['name'=>'Students', 'route'=>'students.store']);
+    }
+
+    public function importTakesView()
+    {
+        return view('import', ['name'=>'Takes', 'route'=>'students.store']);
     }
 
     public function importTakes(Request $request){
@@ -56,22 +61,11 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $id = $request->input('id');
-        $name = $request->input('name');
-        $gender = $request->input('gender');
-        $department = $request->input('department');
-        $section = $request->input('section');
-
-        $student = new Student();
-        $student->stud_id=$id;
-        $student->name=$name;
-        $student->gender=$gender;
-                
-
-        $student->save();
-
-
-        return back();
+        $this->validate($request, [
+            'files'  => 'required|mimes:xls,xlsx'
+           ]);
+        Excel::import(new StudentsImport, $request->file('files'));
+        return back()->with('success', "successfully uploaded Students list excel file!");
 
     }
 
@@ -135,7 +129,7 @@ class StudentController extends Controller
     public function destroy($id)
     {
         $student = Student::destroy($id);
-        return "deleted";
+        return back();
 
 
     }

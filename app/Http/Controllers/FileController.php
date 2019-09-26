@@ -23,7 +23,7 @@ class FileController extends Controller
      */
     public function index()
     {
-        return view('file.index', ['files' =>  ViewFileInstructor::where('user_id', Auth::id())->get(), 'user' => Auth::user()]);
+        return view('file.index', ['files' =>  ViewFileInstructor::where('user_id', Auth::id())->get(), 'user' => Auth::user(), 'teaches'=>Auth::user()->userable->teaches()]);
     }
 
     /**

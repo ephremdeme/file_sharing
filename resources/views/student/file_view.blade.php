@@ -11,7 +11,6 @@
         $('.dataTables_length').addClass('bs-select');
     });
 
-    
 </script>
 @append
 @section('content')
@@ -19,7 +18,7 @@
     <div class="col-12">
 
         <div class="card">
-            
+
             <!-- /.card-header -->
             <div class="card-body">
                 <div class="table-responsive-sm">
@@ -31,7 +30,7 @@
                                 <th class="th-sm">Size</th>
                                 <th class="th-sm">Course Code</th>
                                 <th class="th-sm">Description</th>
-                                <th class="th-sm">Creadted at</th>
+                                <th class="th-sm">Created at</th>
                                 <th class="th-sm">Download</th>
                             </tr>
                         </thead>
@@ -57,7 +56,7 @@
                                 <th class="th-sm">Size</th>
                                 <th class="th-sm">Course Code</th>
                                 <th class="th-sm">Description</th>
-                                <th class="th-sm">Creadted at</th>
+                                <th class="th-sm">Created at</th>
                                 <th class="th-sm">Download</th>
                             </tr>
                         </tfoot>
@@ -72,6 +71,7 @@
 </div>
 
 <!-- Modal -->
+
 
 
 
