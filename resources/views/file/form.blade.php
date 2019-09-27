@@ -1,12 +1,12 @@
-<div class="form-group ">
-        <label for="courseselect1">Course </label>
-        <select name="course_code" class="form-control" id="courseselect1">
+
+
+        <select name="course_code" class="browser-default custom-select" id="courseselect1">
             <option value="" disabled selected>Select Course</option>
-            @foreach ($user->courses as $course)
-            <option value={{$course->course_code}}>{{$course->name}}</option>
+            @foreach ($teaches as $teach)
+            <option value={{$teach->course_code}}>{{$teach->course_code}}</option>
             @endforeach
         </select>
-    </div>
+
 
     
 

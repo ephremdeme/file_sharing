@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('specificCSS')
-<link rel="stylesheet" href="{{ asset('css/mdb.min.css') }} ">
 @append
 
 @section('specificJS')

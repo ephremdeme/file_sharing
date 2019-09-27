@@ -39,9 +39,7 @@
     <div class="col-12">
 
         <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Department management Table With Full Features</h3>
-            </div>
+            
             <!-- /.card-header -->
             <div class="card-body">
                 <span class="table-add float-right mb-3 mr-2"><a href="#!" data-toggle="modal"

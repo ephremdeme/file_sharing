@@ -12,6 +12,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <title>AdminLTE 3 | Starter</title>
     <link rel="stylesheet" href={{ asset("css/app.css") }}>
+    <link rel="stylesheet" href={{ asset("css/mdb.min.css") }}>
+
     @yield('specificCSS')
 
 
@@ -122,7 +124,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <img src="{{ asset(' img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Pierce</a>
+                        <a href="/profile" class="d-block">Pierce</a>
                     </div>
                 </div>
 
@@ -132,94 +134,190 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
+                        
+
+                             <li class="nav-item">
+                                    <a href="/profile" class="nav-link">
+                                        <i class=" fas fa-user  nav-icon" aria-hidden="true"></i>
+                                        <p>Profile
+                                        </p>
+                                    </a>
+        
+                            </li> 
+                             
+                        @hasRole('STUDENT')
                         <li class="nav-item">
-                            <a href="/files" class="nav-link">
-                                <i class=" fa fa-file nav-icon" aria-hidden="true"></i>
-
-                                <p>
-                                    File Management
-
-                                </p>
-                            </a>
-
+                                <a href="/start" class="nav-link">
+                                    <i class=" fas fa-file  nav-icon" aria-hidden="true"></i>
+                                    <p>Files
+                                    </p>
+                                </a>
+    
                         </li>
 
                         <li class="nav-item">
-                            <a href="/users" class="nav-link">
-                                <i class=" fas fa-users fa-2x nav-icon"></i>
-                                <p>
-                                    User Management
-                                </p>
-                            </a>
-
+                                <a href="/shared" class="nav-link">
+                                    <i class=" fas fa-share-square nav-icon" aria-hidden="true"></i>
+                                    <p>Shared Files
+                                    </p>
+                                </a>
+    
                         </li>
 
-                        <li class="nav-item has-treeview">
-                            <a href="/users" class="nav-link">
-                                <i class=" fa fa-chalkboard-teacher fa-2x nav-icon" aria-hidden="true"></i>
-
-                                {{-- <i class=" fas fa-users fa-2x"></i> --}}
-                                <p>
-                                    Instructor Management
-                                    <i class="right fa fa-angle-left"></i>
-                                    {{-- <span class="right badge badge-danger">New</span> --}}
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="/instructors" class="nav-link active">
-                                        <i class="fa fa-home nav-icon"></i>
-                                        <p>Index</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/instructors/import_teaches"  class="nav-link">
-                                        <i class="fa fa-file-import nav-icon"></i>
-                                        <p>Import Teaches</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="/instructors/create" class="nav-link">
-                                        <i class="fa fa-file-import nav-icon"></i>
-                                        <p>Import Instructors</p>
-                                    </a>
-                                </li>
-                            </ul>
+                        @elsehasRole('INSTRUCTOR')
+                        <li class="nav-item">
+                                <a href="/files" class="nav-link">
+                                    <i class=" fa fa-file nav-icon" aria-hidden="true"></i>
+                                    <p>File Management
+                                    </p>
+                                </a>
+    
                         </li>
-                        <li class="nav-item has-treeview">
-                            <a href="/students" class="nav-link">
-                                <i class=" fa fa-user-graduate fa-2x nav-icon" aria-hidden="true"></i>
 
-                                {{-- <i class=" fas fa-users fa-2x"></i> --}}
-                                <p>
-                                    Student Management
-                                    <i class="right fa fa-angle-left"></i>
-                                    {{-- <span class="right badge badge-danger">New</span> --}}
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="/students" class="nav-link active">
-                                        <i class="fa fa-home nav-icon"></i>
-                                        <p>Index</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/students/import_takes" class="nav-link ">
-                                        <i class="fa fa-file-import nav-icon"></i>
-                                        <p>Import Takes</p>
-                                    </a>
-                                </li>
 
-                                <li class="nav-item">
-                                    <a href="/students/create" class="nav-link">
-                                        <i class="fa fa-file-import nav-icon"></i>
-                                        <p>Import Students</p>
+                        @elsehasRole('ADMIN')
+
+                            <li class="nav-item">
+                                    <a href="/files" class="nav-link">
+                                        <i class=" fa fa-file nav-icon" aria-hidden="true"></i>
+                                        <p>File Management
+                                        </p>
                                     </a>
-                                </li>
-                            </ul>
-                        </li>
+        
+                            </li>
+                            <li class="nav-item">
+                                <a href="/users" class="nav-link">
+                                    <i class=" fas fa-users fa-2x nav-icon"></i>
+                                    <p>
+                                        User Management
+                                    </p>
+                                </a>
+    
+                            </li>
+    
+                            <li class="nav-item has-treeview">
+                                <a href="/users" class="nav-link">
+                                    <i class=" fa fa-chalkboard-teacher fa-2x nav-icon" aria-hidden="true"></i>
+    
+                                    {{-- <i class=" fas fa-users fa-2x"></i> --}}
+                                    <p>
+                                        Instructor Management
+                                        <i class="right fa fa-angle-left"></i>
+                                        {{-- <span class="right badge badge-danger">New</span> --}}
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="/instructors" class="nav-link {{url()->current()}} active">
+                                            <i class="fa fa-home nav-icon"></i>
+                                            <p>Index</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/instructors/import_teaches"  class="nav-link">
+                                            <i class="fa fa-file-import nav-icon"></i>
+                                            <p>Import Teaches</p>
+                                        </a>
+                                    </li>
+    
+                                    <li class="nav-item">
+                                        <a href="/instructors/create" class="nav-link">
+                                            <i class="fa fa-file-import nav-icon"></i>
+                                            <p>Import Instructors</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item has-treeview">
+                                <a href="/students" class="nav-link">
+                                    <i class=" fa fa-user-graduate fa-2x nav-icon" aria-hidden="true"></i>
+    
+                                    {{-- <i class=" fas fa-users fa-2x"></i> --}}
+                                    <p>
+                                        Student Management
+                                        <i class="right fa fa-angle-left"></i>
+                                        {{-- <span class="right badge badge-danger">New</span> --}}
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="/students" class="nav-link active">
+                                            <i class="fa fa-home nav-icon"></i>
+                                            <p>Index</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/students/import_takes" class="nav-link ">
+                                            <i class="fa fa-file-import nav-icon"></i>
+                                            <p>Import Takes</p>
+                                        </a>
+                                    </li>
+    
+                                    <li class="nav-item">
+                                        <a href="/students/create" class="nav-link">
+                                            <i class="fa fa-file-import nav-icon"></i>
+                                            <p>Import Students</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item has-treeview">
+                                <a href="/courses" class="nav-link">
+                                    <i class=" fa fa-list fa-2x nav-icon" aria-hidden="true"></i>
+    
+                                    {{-- <i class=" fas fa-users fa-2x"></i> --}}
+                                    <p>
+                                        Course Management
+                                        <i class="right fa fa-angle-left"></i>
+                                        {{-- <span class="right badge badge-danger">New</span> --}}
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="/courses" class="nav-link active">
+                                            <i class="fa fa-list nav-icon"></i>
+                                            <p>Index</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/courses/create" class="nav-link ">
+                                            <i class="fa fa-file-import nav-icon"></i>
+                                            <p>Import Courses</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+    
+                            <li class="nav-item has-treeview">
+                                <a href="/courses" class="nav-link">
+                                    <i class=" fa fa-school fa-2x nav-icon" aria-hidden="true"></i>
+    
+                                    {{-- <i class=" fas fa-users fa-2x"></i> --}}
+                                    <p>
+                                        Department Management
+                                        <i class="right fa fa-angle-left"></i>
+                                        {{-- <span class="right badge badge-danger">New</span> --}}
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="/departments" class="nav-link active">
+                                            <i class="fa fa-school nav-icon"></i>
+                                            <p>Index</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/departments/create" class="nav-link ">
+                                            <i class="fa fa-file-import nav-icon"></i>
+                                            <p>Import Departments</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endhasRole
+
+                        
+                        
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -231,8 +329,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <div class="content-header">
+                    @if(count($errors) > 0)
+                    <div class="alert alert-danger alert-dismissible fade show col-md-auto" role="alert">
+                        Upload Validation Error<br><br>
+                        <ul>
+                            @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+            
+                    @endif
                 <div class="container-fluid">
-
+                        @if($message = Session::get('success'))
+                        <div class="alert alert-success alert-block">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <strong>{{ $message }}</strong>
+                        </div>
+                        @endif
                     @yield('content_header')
                 </div><!-- /.container-fluid -->
             </div>

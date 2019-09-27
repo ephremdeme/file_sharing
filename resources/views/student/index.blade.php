@@ -38,35 +38,11 @@
 @section('content')
 <div class="row">
     <div class="col-12">
-            @if(count($errors) > 0)
-            <div class="alert alert-danger alert-dismissible fade show col-md-auto" role="alert">
-                    Upload Validation Error<br><br>
-                    <ul>
-                     @foreach($errors->all() as $error)
-                     <li>{{ $error }}</li>
-                     @endforeach
-                    </ul>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-            
-           @endif
         
-           @if($message = Session::get('success'))
-           <div class="alert alert-success alert-block">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-                   <strong>{{ $message }}</strong>
-           </div>
-           @endif
+
         <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Student management Table With Full Features</h3>
-            </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <span class="table-add float-right mb-3 mr-2"><a href="#!" data-toggle="modal" data-target="#addstudent"
-                        class="text-success"><i class="fas fa-plus fa-2x" aria-hidden="true"></i></a></span>
                 <div class="table-responsive-sm">
                     <table id="dtBasicExample" class="table table-striped  table-bordered" cellspacing="0" width="100%">
                         <thead>
@@ -105,14 +81,14 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                    <th class="th-sm">First Name</th>
-                                    <th class="th-sm">Last Name</th>
-                            <th class="th-sm">ID</th>
-                            <th class="th-sm">Gender</th>
-                            <th class="th-sm">Creadted at</th>
-                            <th class="th-sm">Edit</th>
-                            <th class="th-sm">Remove</th>
-                                
+                                <th class="th-sm">First Name</th>
+                                <th class="th-sm">Last Name</th>
+                                <th class="th-sm">ID</th>
+                                <th class="th-sm">Gender</th>
+                                <th class="th-sm">Creadted at</th>
+                                <th class="th-sm">Edit</th>
+                                <th class="th-sm">Remove</th>
+
                             </tr>
                         </tfoot>
                     </table>
@@ -153,7 +129,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="addstudent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{{-- <div class="modal fade" id="addstudent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -163,19 +139,20 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('import_takes') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @include('student.form')
-                </form>
-            </div>
-
-        </div>
-    </div>
+                <form action="{{ route('students.store') }}" method="POST" enctype="multipart/form-data">
+@csrf
+@include('student.form')
+</form>
 </div>
 
+</div>
+</div>
+</div> --}}
 
 
-<div class="modal fade" id="editstudent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+<div class="modal fade" id="editstudent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -189,69 +166,30 @@
                     @csrf
                     @method('PUT')
 
-                            <div class="form-group">
-                <label for="yearselect">Year </label>
-                    <select name="year" class="form-control" id="yearselect">
-                        <option value="" disabled selected>Select Year</option>
-                        <option value=1>1 Year</option>
-                        <option value=2>2 Year</option>
-                        <option value=3>3 Year</option>
-                        <option value=4>4 Year</option>
-                        <option value=5>5 Year</option>
-                    </select>
+
+                    <div class="form-group">
+                        <label for="nameselect">Student Name</label>
+                        <input type="text" name="name" class="form-control" id="nameselect" placeholder="Student Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="idselect">Student id</label>
+                        <input class="form-control" name="id" id="idselect" placeholder="student id">
+                    </div>
+                    <div class="form-group">
+                        <label for="genderselect">Gender</label>
+                        <input class="form-control" name="gender" id="genderselect" placeholder="gender">
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label for="courseselect">Course </label>
-                            <select name="course_code" class="form-control" id="courseselect">
-                                <option value="" disabled selected>Select Course</option>
-                                @foreach ($user->courses as $course)
-                                <option value={{$course->id}}->{{$course->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group col-md-4">
-                            <label for="deptselect">Department</label>
-                            <select name="dept" class="form-control" id="deptselect">
-                                <option value="" disabled selected>Select dept</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group col-md-4">
-                                <label for="secselect">Section</label>
-                                <input type="number" min="1" max="50" required name="section" class="form-control"
-                                    id="secselect" aria-describedby="SectioHelp" placeholder="Enter Section">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="nameselect">Student Name</label>
-                            <input type="text" name="name" class="form-control" id="nameselect"
-                                placeholder="Student Name">
-                        </div>
-                        <div class="form-group">
-                            <label for="idselect">Student id</label>
-                            <input class="form-control" name="id" id="idselect" placeholder="student id">
-                        </div>
-                        <div class="form-group">
-                            <label for="genderselect">Gender</label>
-                            <input class="form-control" name="gender" id="genderselect" placeholder="gender">
-                        </div>
-        
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
             </div>
 
-                </form>
-            </div>
-
+            </form>
         </div>
+
     </div>
 </div>
-
 
 @endsection

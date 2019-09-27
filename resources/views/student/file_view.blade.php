@@ -11,6 +11,15 @@
         $('.dataTables_length').addClass('bs-select');
     });
 
+    function get_action() {
+        $('.forward').on('click', function () {
+            console.log($(this).data('id'));
+            $("#forward_form").attr('action', "/files/" + $(this).data('id') +"/forward");
+            
+        })
+    }
+    get_action()
+
 </script>
 @append
 @section('content')
@@ -30,7 +39,7 @@
                                 <th class="th-sm">Size</th>
                                 <th class="th-sm">Course Code</th>
                                 <th class="th-sm">Description</th>
-                                <th class="th-sm">Created at</th>
+                                <th class="th-sm">Forward</th>
                                 <th class="th-sm">Download</th>
                             </tr>
                         </thead>
@@ -42,9 +51,15 @@
                                 <td>{{$file->size /1024}}</td>
                                 <td>{{$file->course_code}}</td>
                                 <td>{{$file->description}}</td>
-                                <td>{{$file->created_at}}</td>
                                 <td>
-                                    <span class="table-remove"><a href="files/{{$file->id}}">Download</a></span>
+
+                                        <span class="table-remove"><button type="button" data-id="{{$file->id}}"
+                                                data-toggle="modal" data-target="#forward"
+                                                class="btn btn-outline-success btn-rounded btn-sm m-0 waves-effect waves-light my-0 forward">
+                                                <i class="fa fa-share-square"></i></button></span>
+                                </td>
+                                <td>
+                                    <a href="files/{{$file->id}}" class="btn btn-outline-teal btn-rounded btn-sm m-0 waves-effect waves-light">Download</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -56,7 +71,7 @@
                                 <th class="th-sm">Size</th>
                                 <th class="th-sm">Course Code</th>
                                 <th class="th-sm">Description</th>
-                                <th class="th-sm">Created at</th>
+                                <th class="th-sm">Forward</th>
                                 <th class="th-sm">Download</th>
                             </tr>
                         </tfoot>
@@ -72,7 +87,36 @@
 
 <!-- Modal -->
 
+<div class="modal fade" id="forward" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <form id="forward_form" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    
+                    <div class="form-group">
+                        <label for="idselect">Student id</label>
+                        <input class="form-control" name="id" id="idselect" placeholder="student id">
+                    </div>
 
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+            </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
 
 
 

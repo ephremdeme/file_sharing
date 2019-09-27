@@ -7,8 +7,8 @@ use App\Instructor;
 
 class File extends Model
 {
-    //
-    public function instructor(){
-        return $this->belongsTo('App\Instructor');
+
+    public function users(){
+        return $this->belongsToMany('App\User');
     }
 }

@@ -8,6 +8,9 @@ use App\Http\Controllers\Controller;
 use App\Course;
 use App\Department;
 
+use Excel;
+use App\Imports\CoursesImport;
+
 class CourseController extends Controller
 {
     /**
@@ -28,8 +31,23 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        return view('import', ['name'=>'Courses', 'route'=>'import_courses']);
     }
+
+
+    /**
+     * Store excell   resource in storage.
+     
+     */
+
+    public function importCourses(Request $request){
+        
+        Excel::import(new CoursesImport, $request->file('files'));
+        return redirect('/courses')->with('success', "successfully uploaded Instructor's teaches excel file!");
+    }
+
+
+
 
     /**
      * Store a newly created resource in storage.

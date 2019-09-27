@@ -41,11 +41,11 @@ class InstructorController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'files'  => 'required|mimes:xls,xlsx'
+            'files'  => 'required'
            ]);
         Excel::import(new InstructorsImport, $request->file('files'));
 
-        return back()->with('success', "successfully uploaded Instructors excel file!");
+        return redirect('/instructors')->with('success', "successfully uploaded Instructors excel file!");
     }
 
     public function importTeachesView()
@@ -55,10 +55,10 @@ class InstructorController extends Controller
 
     public function importTeaches(Request $request){
         $this->validate($request, [
-            'files'  => 'required|mimes:xls,xlsx'
+            'files'  => 'required'
            ]);
         Excel::import(new TeachesImport, $request->file('files'));
-        return back()->with('success', "successfully uploaded Instructor's teaches excel file!");
+        return redirect('/instructors')->with('success', "successfully uploaded Instructor's teaches excel file!");
     }
 
     /**

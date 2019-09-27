@@ -1,6 +1,6 @@
 <div class="form-group">
                 <label for="yearselect1">Year </label>
-                    <select name="year" class="form-control" id="yearselect1">
+                    <select name="year" class="browser-default custom-select" id="yearselect1">
                         <option value="" disabled selected>Select Year</option>
                         <option value=1>1 Year</option>
                         <option value=2>2 Year</option>
@@ -11,7 +11,7 @@
                     </div>
                         <div class="form-group ">
                             <label for="deptselect1">Department </label>
-                            <select name="dept" class="form-control" id="deptselect1">
+                            <select name="dept" class="browser-default custom-select" id="deptselect1">
                                 <option value="" disabled selected>Select Department</option>
                                 @foreach ($departments as $dept)
                                 <option value={{$dept->id}}>{{$dept->name}}</option>
@@ -21,7 +21,7 @@
 
                         <div class="form-group">
                             <label for="course_codeselect1">Course_code</label>
-                            <input type="text" name="course_code" class="form-control" id="course_codeselect1"
+                            form-control                    <input type="text" name="course_code" class="form-control" id="course_codeselect1"
                                 placeholder="Course code">
                         </div>
                         <div class="form-group">

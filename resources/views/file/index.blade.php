@@ -11,6 +11,10 @@
         $('.dataTables_length').addClass('bs-select');
     });
 
+    $(document).ready(function() {
+$('.mdb-select').materialSelect();
+});
+
     function fill_form() {
         $('.edit').on('click', function () {
             $('#nameselect').val($(this).data('name'))
@@ -169,10 +173,10 @@
                     @method('PUT')
                         <div class="form-group ">
                             <label for="courseselect">Course </label>
-                            <select name="course_code" class="form-control" id="courseselect">
+                            <select name="course_code" class="browser-default custom-select" id="courseselect">
                                 <option value="" disabled selected>Select Course</option>
-                                @foreach ($user->courses as $course)
-                                <option value={{$course->course_code}}>{{$course->name}}</option>
+                                @foreach ($teaches as $teach)
+                                <option value={{$teach->course_code}}>{{$teach->course_code}}</option>
                                 @endforeach
                             </select>
                         </div>

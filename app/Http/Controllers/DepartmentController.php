@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Department;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Excel;
+
+use App\Imports\DepartmentsImport;
 
 class DepartmentController extends Controller
 {
@@ -25,7 +28,19 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        //
+        return view('import', ['name'=>'Departments', 'route'=>'import_departments']);
+    }
+
+
+    /**
+     * Store excell   resource in storage.
+     
+     */
+
+    public function importCourses(Request $request){
+        
+        Excel::import(new DepartmentsImport, $request->file('files'));
+        return redirect('/departments')->with('success', "successfully uploaded Instructor's teaches excel file!");
     }
 
     /**
