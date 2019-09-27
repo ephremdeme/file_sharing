@@ -46,19 +46,17 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Role');
     }
 
-    public function courses(){
-        return $this->belongsToMany('App\Course')
-        ->using('App\CourseUser');
-    }
 
     public function files(){
-        return $this->hasManyThrough(
-            'App\File', 
-            'App\CourseUser',
-            'user_id',
-            'course_id',
-            'id',
-            'course_id'
-        );
+        return $this->belongsToMany('App\File');
+    }
+    
+
+    public function hasRole($role){
+        $count = $this->roles()->where('name', $role)->count();
+        if($count==1){
+            return true;
+        }
+        return false;
     }
 }

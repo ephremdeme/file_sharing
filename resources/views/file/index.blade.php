@@ -11,6 +11,10 @@
         $('.dataTables_length').addClass('bs-select');
     });
 
+    $(document).ready(function() {
+$('.mdb-select').materialSelect();
+});
+
     function fill_form() {
         $('.edit').on('click', function () {
             $('#nameselect').val($(this).data('name'))
@@ -38,9 +42,7 @@
     <div class="col-12">
 
         <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">File management Table With Full Features</h3>
-            </div>
+            
             <!-- /.card-header -->
             <div class="card-body">
                 <span class="table-add float-right mb-3 mr-2"><a href="#!" data-toggle="modal" data-target="#addFile"
@@ -66,15 +68,14 @@
                                 <td>{{$file->name}}</td>
                                 <td>{{$file->type}}</td>
                                 <td>{{$file->size /1024}}</td>
-                                <td>{{$file->course->course_code}}</td>
+                                <td>CSE123</td>
                                 <td>{{$file->description}}</td>
                                 <td>{{$file->created_at}}</td>
-                                <td>{{$user->userable->name}}</td>
+                                <td>{{$user->username}}</td>
                                 <td>
                                     <span class="table-remove"><button data-toggle="modal" data-target="#editFile"
                                             type="button" data-name="{{$file->name}}" data-desc="{{$file->description}}"
-                                            data-type="{{$file->type}}" data-size="{{$file->size}}"
-                                            data-course_code="{{$file->course->course_code}}" data-id="{{$file->id}}"
+                                            data-type="{{$file->type}}" data-size="{{$file->size}}" data-id="{{$file->id}}"
                                             class="btn btn-success btn-rounded btn-sm my-0 edit">Edit </button></span>
                                 </td>
                                 <td>
@@ -170,37 +171,18 @@
                 <form id="editform" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    <div class="form-group">
-                        <label for="yearselect">Year </label>
-                        <select name="year" class="form-control" id="yearselect">
-                            <option value="" disabled selected>Select Year</option>
-                            <option value=1>1 Year</option>
-                            <option value=2>2 Year</option>
-                            <option value=3>3 Year</option>
-                            <option value=4>4 Year</option>
-                            <option value=5>5 Year</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
+                        <div class="form-group ">
                             <label for="courseselect">Course </label>
-                            <select name="course_code" class="form-control" id="courseselect">
+                            <select name="course_code" class="browser-default custom-select" id="courseselect">
                                 <option value="" disabled selected>Select Course</option>
-                                @foreach ($user->courses as $course)
-                                <option value={{$course->id}}>{{$course->name}}</option>
+                                @foreach ($teaches as $teach)
+                                <option value={{$teach->course_code}}>{{$teach->course_code}}</option>
                                 @endforeach
                             </select>
                         </div>
                     
-                        <div class="form-group col-md-4">
-                            <label for="deptselect">Department</label>
-                            <select name="dept" class="form-control" id="deptselect">
-                                <option value="" disabled selected>Select dept</option>
-                            </select>
-                        </div>
                     
-                        <div class="form-group col-md-4">
+                        <div class="form-group ">
                             <label for="secselect">Section</label>
                             <input type="number" min="1" max="50" required name="section" class="form-control"
                                 id="secselect" aria-describedby="SectioHelp" placeholder="Enter Section">

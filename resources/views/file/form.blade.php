@@ -1,39 +1,21 @@
-<div class="form-group">
-    <label for="yearselect1">Year </label>
-    <select name="year" class="form-control" id="yearselect1">
-        <option value="" disabled selected>Select Year</option>
-        <option value=1>1 Year</option>
-        <option value=2>2 Year</option>
-        <option value=3>3 Year</option>
-        <option value=4>4 Year</option>
-        <option value=5>5 Year</option>
-    </select>
-</div>
 
-<div class="form-row">
-    <div class="form-group col-md-4">
-        <label for="courseselect1">Course </label>
-        <select name="course_code" class="form-control" id="courseselect1">
+
+        <select name="course_code" class="browser-default custom-select" id="courseselect1">
             <option value="" disabled selected>Select Course</option>
-            @foreach ($user->courses as $course)
-            <option value={{$course->id}}>{{$course->name}}</option>
+            @foreach ($teaches as $teach)
+            <option value={{$teach->course_code}}>{{$teach->course_code}}</option>
             @endforeach
         </select>
-    </div>
 
-    <div class="form-group col-md-4">
-        <label for="deptselect1">Department</label>
-        <select name="dept" class="form-control" id="deptselect1">
-            <option value="" disabled selected>Select dept</option>
-        </select>
-    </div>
 
-    <div class="form-group col-md-4">
+    
+
+    <div class="form-group">
         <label for="secselect1">Section</label>
         <input type="number" min="1" max="50" required name="section" class="form-control"
             id="secselect1" aria-describedby="SectioHelp" placeholder="Enter Section">
     </div>
-</div>
+
 
 <div class="form-group">
     <label for="nameselect1">File Name</label>
